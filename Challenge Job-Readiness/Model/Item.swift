@@ -19,4 +19,5 @@ struct Body: Codable {
     let currency_id: String
     let sold_quantity: Int
     let secure_thumbnail: String
+    let accepts_mercadopago: Bool
 }

@@ -9,10 +9,11 @@ import Foundation
 
 struct ProductsNetworkManager {
     let top20ProductsURL =  "https://api.mercadolibre.com/highlights/MLA/category/"
-    
     let authorizationHeader = "Bearer APP_USR-7814835816886199-111713-f4dd4e6066a0cb111756a547bb2e7093-362268385"
-    let multiGetURL = "https://api.mercadolibre.com/items?ids="
     
+    // Make sure attributes parameters match with model of Item
+    let multiGetURL = "https://api.mercadolibre.com/items?attributes=id,title,price,currency_id,sold_quantity,secure_thumbnail,accepts_mercadopago&ids="
+
     
     // Returns an array of the IDs of the products the given category
     func getMostSoldProductsIDs(of categoryId: String) async throws -> [String] {
@@ -33,6 +34,7 @@ struct ProductsNetworkManager {
     }
    
     
+    // Decodes to array of objets that only contain a string ID
     private func decodeProducts(from data: Data) throws -> [Product] {
         let decoder = JSONDecoder()
         let topProducts = try decoder.decode(TopProducts.self, from: data)
@@ -43,7 +45,6 @@ struct ProductsNetworkManager {
     func getProducts(productsIDs: [String]) async -> [Item] {
         var items: [Item] = []
   
-        
         // Make a network call for each ID in productsIDs
         for id in productsIDs {
             // Create URL
@@ -56,32 +57,18 @@ struct ProductsNetworkManager {
                
                 // Decode single product
                 let item = try decodeItem(from: data)
+                
+                // The json gives back an array of 1 element so take the first and only element
                 items.append(item[0])
-            
+
             } catch  {
                 print(error.localizedDescription)
             }
         }
-        
         return items
-//        let endPoint = multiGetURL + productsIds.joined(separator: ",")
-//        let url = URL(string: endPoint)!
-//
-//        // Network call
-//        let (data, _) = try await URLSession.shared.data(from: url)
-//
-//        // Decode data
-//        let items = try decodeItems(from: data)
-//        return items
     }
-    
-    
-//    private func decodeItems(from data: Data) throws -> [Item] {
-//        let decoder = JSONDecoder()
-//        let items = try decoder.decode([Item].self, from: data)
-//        return items
-//    }
-    
+
+    // Decodes the actual product that contains the useful attributes
     private func decodeItem(from data: Data) throws -> [Item] {
         let decoder = JSONDecoder()
         let items = try decoder.decode([Item].self, from: data)

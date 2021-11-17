@@ -12,12 +12,14 @@ class ProductDetailViewController: UIViewController {
 
     typealias FinalProduct = Body
     
-    @IBOutlet weak var testLabel: UILabel!
+    //@IBOutlet weak var testLabel: UILabel!
+    var testLabel = UILabel()
     var selectedProduct: FinalProduct?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         testLabel.text = "Title: \(selectedProduct?.title) Price: \(selectedProduct?.price)"
         // Do any additional setup after loading the view.
     }
