@@ -59,13 +59,14 @@ class CategoriesSearchViewController: UIViewController {
     }
     
     
+    // Sets up navigation to ProductsListViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Gets the ProductDetail VC and passes the selected category to it
-        guard let productDetailVC = segue.destination as? ProductsListViewController,
+        // Gets the ProductList VC and passes the selected category to it
+        guard let productsListVC = segue.destination as? ProductsListViewController,
               let indexPath = categoriesTableView.indexPathForSelectedRow else {
                   return
               }
-        productDetailVC.selectedCategory = categories[indexPath.row]
+        productsListVC.selectedCategory = categories[indexPath.row]
         
         // Deselect row
         categoriesTableView.deselectRow(at: indexPath, animated: false)

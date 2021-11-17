@@ -12,7 +12,6 @@ class ProductsListViewController: UIViewController {
     // MARK: Outlets
     @IBOutlet weak var productsTableView: UITableView!
     
-    
     // MARK: Instance vars
     var selectedCategory: Category?
     var networkManager = ProductsNetworkManager()
@@ -48,10 +47,25 @@ class ProductsListViewController: UIViewController {
             }
         }
     }
+  
+    
+    // Sets up navigation to ProductDetailViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Gets the ProductDetail VC and passes the selected product to it
+        guard let productDetailVC = segue.destination as? ProductDetailViewController,
+              let indexPath = productsTableView.indexPathForSelectedRow else {
+                  return
+              }
+        
+        // The property body is where the Actual data is
+        let selectedProduct = products[indexPath.row].body
+        productDetailVC.selectedProduct = selectedProduct
+
+    }
 
 }
 
-
+// MARK: TableView Data Source
 extension ProductsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         products.count

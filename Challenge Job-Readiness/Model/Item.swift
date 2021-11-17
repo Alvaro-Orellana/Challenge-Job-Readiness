@@ -13,11 +13,10 @@ struct Item: Codable {
 }
 
 struct Body: Codable {
-//    let title: String
-//    let price: Float
-//    let currency_id: String
-//    let sold_quantity: Int
-//    let secure_thumbnail: String
     let id: String
     let title: String
+    let price: Float
+    let currency_id: String
+    let sold_quantity: Int
+    let secure_thumbnail: String
 }

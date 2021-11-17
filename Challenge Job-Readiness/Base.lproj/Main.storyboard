@@ -84,6 +84,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="U4R-VX-XdG" kind="show" id="B1U-es-gti"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -105,6 +108,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eS5-Wx-ZGO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1883" y="94"/>
+        </scene>
+        <!--Product Detail View Controller-->
+        <scene sceneID="fnt-6X-cUV">
+            <objects>
+                <viewController id="U4R-VX-XdG" customClass="ProductDetailViewController" customModule="Challenge_Job_Readiness" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sQV-J9-WgF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dje-Fy-pan">
+                                <rect key="frame" x="0.0" y="408" width="414" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="91N-yX-sbu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="n21-n0-2aE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Dje-Fy-pan" firstAttribute="centerY" secondItem="sQV-J9-WgF" secondAttribute="centerY" id="0lm-Og-QIn"/>
+                            <constraint firstItem="Dje-Fy-pan" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" id="QCC-i3-QQL"/>
+                            <constraint firstItem="n21-n0-2aE" firstAttribute="trailing" secondItem="Dje-Fy-pan" secondAttribute="trailing" id="vqh-B5-PSq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ooZ-eu-a4A"/>
+                    <connections>
+                        <outlet property="testLabel" destination="Dje-Fy-pan" id="Jvk-Kd-rss"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pgu-3k-dW1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2726.0869565217395" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="SBs-1e-cao">
