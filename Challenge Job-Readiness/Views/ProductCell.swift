@@ -11,7 +11,6 @@ class ProductCell: UITableViewCell {
     
     typealias CellProduct = Body
 
-
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -20,8 +19,9 @@ class ProductCell: UITableViewCell {
     
     func configure(with product: CellProduct) {
         titleLabel.text = product.title
-        priceLabel.text = "\(product.price) \(product.currency_id)"
-        mercadoPagoLabel.text = product.accepts_mercadopago ? "Acepta mercado pago!" : ""
+        priceLabel.text = "\(Int(product.price)) \(product.currency_id)"
+        mercadoPagoLabel.isHidden = !product.accepts_mercadopago
+        //mercadoPagoLabel.text = product.accepts_mercadopago ? "Acepta mercado pago!" : ""
         
         Task(priority: .high) {
             do {

@@ -39,7 +39,7 @@ class ProductsListViewController: UIViewController {
 
     func getTopProducts(of category: Category?)  {
         guard let categoryID = category?.category_id else { return }
-        Task {
+        Task(priority: .high) {
             do {
                 // Gets only the ID's of the the products of given category
                 let productsID = try await networkManager.getMostSoldProductsIDs(of: categoryID)

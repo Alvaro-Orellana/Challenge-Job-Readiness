@@ -9,10 +9,10 @@ import Foundation
 
 struct ProductsNetworkManager {
     let top20ProductsURL =  "https://api.mercadolibre.com/highlights/MLA/category/"
-    let authorizationHeader = " Bearer APP_USR-7814835816886199-111801-00fffa77dff65e1b26bb854258da1618-362268385"
+    let authorizationHeader = " Bearer APP_USR-7814835816886199-111812-5b43df684b91e035e84d3f0a3756887a-362268385"
     
     // Make sure attributes parameters match with model of Item
-    let multiGetURL = "https://api.mercadolibre.com/items?attributes=id,title,price,currency_id,sold_quantity,secure_thumbnail,accepts_mercadopago&ids="
+    let multiGetURL = "https://api.mercadolibre.com/items?attributes=id,title,price,currency_id,sold_quantity,secure_thumbnail,accepts_mercadopago,warranty,pictures&ids="
 
     
     // Returns an array of the IDs of the products the given category

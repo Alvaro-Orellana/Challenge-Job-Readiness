@@ -20,4 +20,13 @@ struct Body: Codable {
     let sold_quantity: Int
     let secure_thumbnail: String
     let accepts_mercadopago: Bool
+    let warranty: String
+    let pictures: [Picture]
+}
+
+struct Picture: Codable {
+    let id: String
+    let secure_url: String
+    let size: String
+    let max_size: String
 }

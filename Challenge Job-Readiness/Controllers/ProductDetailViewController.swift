@@ -12,11 +12,14 @@ class ProductDetailViewController: UIViewController {
 
     typealias FinalProduct = Body
     
+    @IBOutlet weak var soldItemsLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var priceLabel: UILabel!
-    
+    @IBOutlet weak var acceptsMercadoPagoLabel: UILabel!
+    @IBOutlet weak var warrantyLabel: UILabel!
     @IBOutlet weak var buyButton: UIButton!
+    @IBOutlet weak var butWithMercadoPagoButton: UIButton!
     
     var product: FinalProduct!
     
@@ -25,9 +28,13 @@ class ProductDetailViewController: UIViewController {
         buyButton.layer.borderWidth = 0.8
         buyButton.layer.borderColor = UIColor(red: 0, green: 0, blue: 230.0, alpha: 1.0).cgColor
 
-
+        soldItemsLabel.text = "\(product.sold_quantity) Vendidos"
         titleLabel.text = product.title
         priceLabel.text = "$ \(Int(product.price))"
+        acceptsMercadoPagoLabel.isHidden = !product.accepts_mercadopago
+        warrantyLabel.text = product.warranty
+        
+        butWithMercadoPagoButton.isHidden = !product.accepts_mercadopago
         loadImage()
     }
     

@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,20 +35,24 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q40-eL-tan" userLabel="Mercado Pago Label">
-                        <rect key="frame" x="145" y="94" width="168" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Acepta Mercado Pago!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q40-eL-tan" userLabel="Mercado Pago Label">
+                        <rect key="frame" x="145" y="94" width="125" height="18"/>
+                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="aN0-b0-Vwx"/>
+                            <constraint firstAttribute="width" constant="125" id="iH1-LZ-x7e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="trU-YU-Vib" secondAttribute="trailing" constant="20" symbolic="YES" id="1yi-0N-RDF"/>
-                    <constraint firstItem="q40-eL-tan" firstAttribute="top" secondItem="PPG-H9-AA0" secondAttribute="bottom" constant="15.5" id="9Rm-ih-ync"/>
-                    <constraint firstItem="q40-eL-tan" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="B7O-Ff-Af2"/>
                     <constraint firstItem="trU-YU-Vib" firstAttribute="leading" secondItem="fps-Fw-7w5" secondAttribute="trailing" constant="11" id="CnS-9Q-zo9"/>
                     <constraint firstItem="PPG-H9-AA0" firstAttribute="top" secondItem="trU-YU-Vib" secondAttribute="bottom" constant="21.5" id="GZX-7Y-C53"/>
                     <constraint firstItem="PPG-H9-AA0" firstAttribute="leading" secondItem="fps-Fw-7w5" secondAttribute="trailing" constant="11" id="Sji-ZQ-Rss"/>
+                    <constraint firstItem="q40-eL-tan" firstAttribute="top" secondItem="PPG-H9-AA0" secondAttribute="bottom" constant="15.5" id="X1v-da-XoD"/>
                     <constraint firstItem="fps-Fw-7w5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-55" id="X6F-WV-aJJ"/>
                     <constraint firstItem="fps-Fw-7w5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="XWQ-gQ-Vc3"/>
                     <constraint firstItem="q40-eL-tan" firstAttribute="leading" secondItem="fps-Fw-7w5" secondAttribute="trailing" constant="11" id="asN-yJ-1Xy"/>
@@ -66,4 +71,9 @@
             <point key="canvasLocation" x="128.2608695652174" y="143.63839285714286"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
