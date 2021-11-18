@@ -6,33 +6,54 @@
 //
 
 import UIKit
-
+ 
 
 class ProductDetailViewController: UIViewController {
 
     typealias FinalProduct = Body
     
-    //@IBOutlet weak var testLabel: UILabel!
-    var testLabel = UILabel()
-    var selectedProduct: FinalProduct?
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var priceLabel: UILabel!
     
+    @IBOutlet weak var buyButton: UIButton!
+    
+    var product: FinalProduct!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        testLabel.text = "Title: \(selectedProduct?.title) Price: \(selectedProduct?.price)"
-        // Do any additional setup after loading the view.
+        buyButton.layer.borderWidth = 0.8
+        buyButton.layer.borderColor = UIColor(red: 0, green: 0, blue: 230.0, alpha: 1.0).cgColor
+
+
+        titleLabel.text = product.title
+        priceLabel.text = "$ \(Int(product.price))"
+        loadImage()
+    }
+    
+    func loadImage() {
+        if let url = URL(string: product.secure_thumbnail) {
+            Task(priority: .high) {
+                do {
+                    let (data, _) = try await URLSession.shared.data(from: url)
+                    
+                    productImage.image = UIImage(data: data)
+                    
+                } catch {
+                    print(error.localizedDescription)
+                    productImage.image = UIImage(systemName: "questionmark.circle")
+                }
+            }
+        } else {
+            productImage.image = UIImage(systemName: "questionmark.circle")
+        }
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func buuButtonPressed(_ sender: UIButton) {
     }
-    */
-
+    
+    @IBAction func buyWithMercadoPagoButtonPressed(_ sender: UIButton) {
+    }
+    
 }

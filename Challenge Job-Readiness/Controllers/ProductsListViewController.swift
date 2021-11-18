@@ -21,52 +21,41 @@ class ProductsListViewController: UIViewController {
         }
     }
     
+    
     // MARK: Instance methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialSetup()
+        getTopProducts(of: selectedCategory)
+    }
+    
+    private func initialSetup() {
         productsTableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "products_cell")
         productsTableView.dataSource = self
         productsTableView.delegate = self
         title = selectedCategory?.category_name
-        view.backgroundColor = .yellow
-        getTopProducts(of: selectedCategory)
+        //view.backgroundColor = .yellow
     }
-    
 
     func getTopProducts(of category: Category?)  {
-        guard let categoryID = category?.category_id else {return}
-        
+        guard let categoryID = category?.category_id else { return }
         Task {
             do {
                 // Gets only the ID's of the the products of given category
                 let productsID = try await networkManager.getMostSoldProductsIDs(of: categoryID)
 
-                // Gets the actual products
+                // Gets the actual products using the IDs
                 products = await networkManager.getProducts(productsIDs: productsID)                
                 
             } catch {
+                Alert.show(on: self, title: "Error", message: error.localizedDescription)
                 print(error.localizedDescription)
             }
         }
     }
-  
     
-    // Sets up navigation to ProductDetailViewController
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("SE LLAMO PREPARE FOR SEGUE")
-        // Gets the ProductDetail VC and passes the selected product to it
-        guard let productDetailVC = segue.destination as? ProductDetailViewController,
-              let indexPath = productsTableView.indexPathForSelectedRow else {
-                  return
-              }
-        
-        // The property body is where the Actual data is
-        let selectedProduct = products[indexPath.row].body
-        productDetailVC.selectedProduct = selectedProduct
-
-    }
-
 }
+
 
 // MARK: TableView Data Source
 extension ProductsListViewController: UITableViewDataSource {
@@ -76,34 +65,33 @@ extension ProductsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "products_cell", for: indexPath) as! ProductCell
-        //let cell = Bundle.main.loadNibNamed("CellXib", owner: self, options: nil)?.first as! ProductCell
-
-        
         let product = products[indexPath.row]
         
-        cell.titleLabel.text = product.body.title
-        cell.priceLabel.text = "\(product.body.price) \(product.body.currency_id)"
-        cell.mercadoPagoLabel.text = product.body.accepts_mercadopago ? "Acepta mercado pago!" : ""
-        cell.productImage.image = UIImage(named: "auto_rojo")
+        // The body property is where the Actual data is
+        cell.configure(with: product.body)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130 //give height you want
+        // TODO: Better Height
+        return 170
       }
 }
 
+
+// MARK: TableView Delegate
 extension ProductsListViewController: UITableViewDelegate {
+    // Creates, configures and navigates to ProductDetail VC when row is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("SE LLAMO DID SELECT ROW AT")
-         let productDetailVC = ProductDetailViewController()
+        tableView.deselectRow(at: indexPath, animated: false)
         
-        
-        // The property body is where the Actual data is
+        // The body property is where the Actual data is
         let selectedProduct = products[indexPath.row].body
-        productDetailVC.selectedProduct = selectedProduct
         
-        
+        // Create ProductDetail VC and present it
+        let productDetailVC = storyboard?.instantiateViewController(withIdentifier: "Product_Detail_VC") as! ProductDetailViewController
+       
+        productDetailVC.product = selectedProduct
         navigationController?.pushViewController(productDetailVC, animated: true)
     }
 }

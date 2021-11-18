@@ -84,9 +84,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="U4R-VX-XdG" kind="show" id="B1U-es-gti"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -112,32 +109,73 @@
         <!--Product Detail View Controller-->
         <scene sceneID="fnt-6X-cUV">
             <objects>
-                <viewController id="U4R-VX-XdG" customClass="ProductDetailViewController" customModule="Challenge_Job_Readiness" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Product_Detail_VC" id="U4R-VX-XdG" customClass="ProductDetailViewController" customModule="Challenge_Job_Readiness" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sQV-J9-WgF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dje-Fy-pan">
-                                <rect key="frame" x="0.0" y="408" width="414" height="80"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="91N-yX-sbu"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dje-Fy-pan">
+                                <rect key="frame" x="20" y="44" width="374" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sht-xc-Kal">
+                                <rect key="frame" x="20" y="113" width="374" height="272"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJh-ka-neG" userLabel="price Label">
+                                <rect key="frame" x="20" y="408" width="41.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPQ-t1-j6Q">
+                                <rect key="frame" x="20" y="831" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Comprar con Mercado Pago">
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buyWithMercadoPagoButtonPressed:" destination="U4R-VX-XdG" eventType="touchUpInside" id="hJV-X8-abv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snp-Be-D7A">
+                                <rect key="frame" x="20" y="770" width="374" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Comprar">
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="buuButtonPressed:" destination="U4R-VX-XdG" eventType="touchUpInside" id="qJm-zn-3vy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="n21-n0-2aE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Dje-Fy-pan" firstAttribute="centerY" secondItem="sQV-J9-WgF" secondAttribute="centerY" id="0lm-Og-QIn"/>
-                            <constraint firstItem="Dje-Fy-pan" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" id="QCC-i3-QQL"/>
-                            <constraint firstItem="n21-n0-2aE" firstAttribute="trailing" secondItem="Dje-Fy-pan" secondAttribute="trailing" id="vqh-B5-PSq"/>
+                            <constraint firstItem="HPQ-t1-j6Q" firstAttribute="bottom" secondItem="n21-n0-2aE" secondAttribute="bottom" id="2PU-HH-433"/>
+                            <constraint firstItem="WJh-ka-neG" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" constant="20" id="7JI-1j-yDM"/>
+                            <constraint firstItem="Dje-Fy-pan" firstAttribute="top" secondItem="n21-n0-2aE" secondAttribute="top" id="BBq-qk-DZ2"/>
+                            <constraint firstItem="n21-n0-2aE" firstAttribute="trailing" secondItem="Dje-Fy-pan" secondAttribute="trailing" constant="20" id="DGK-PZ-tRX"/>
+                            <constraint firstItem="HPQ-t1-j6Q" firstAttribute="top" secondItem="snp-Be-D7A" secondAttribute="bottom" constant="30" id="Gn2-ql-CJD"/>
+                            <constraint firstItem="n21-n0-2aE" firstAttribute="bottom" secondItem="Sht-xc-Kal" secondAttribute="bottom" constant="477" id="JIJ-Om-UVm"/>
+                            <constraint firstItem="n21-n0-2aE" firstAttribute="trailing" secondItem="HPQ-t1-j6Q" secondAttribute="trailing" constant="20" id="KiT-v1-JdT"/>
+                            <constraint firstItem="Sht-xc-Kal" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" constant="20" id="NGx-cr-MAK"/>
+                            <constraint firstItem="n21-n0-2aE" firstAttribute="trailing" secondItem="Sht-xc-Kal" secondAttribute="trailing" constant="20" id="Wb9-4X-Zdl"/>
+                            <constraint firstItem="n21-n0-2aE" firstAttribute="trailing" secondItem="snp-Be-D7A" secondAttribute="trailing" constant="20" id="XC3-py-NkF"/>
+                            <constraint firstItem="WJh-ka-neG" firstAttribute="top" secondItem="Sht-xc-Kal" secondAttribute="bottom" constant="23" id="bCh-Tx-ohw"/>
+                            <constraint firstItem="HPQ-t1-j6Q" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" constant="20" id="fBs-Zh-1Bj"/>
+                            <constraint firstItem="Dje-Fy-pan" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" constant="20" id="g6c-AQ-qNa"/>
+                            <constraint firstItem="snp-Be-D7A" firstAttribute="leading" secondItem="n21-n0-2aE" secondAttribute="leading" constant="20" id="mvj-8X-9rE"/>
+                            <constraint firstItem="Sht-xc-Kal" firstAttribute="top" secondItem="Dje-Fy-pan" secondAttribute="bottom" constant="40" id="vki-Ku-GLt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ooZ-eu-a4A"/>
                     <connections>
-                        <outlet property="testLabel" destination="Dje-Fy-pan" id="Jvk-Kd-rss"/>
+                        <outlet property="buyButton" destination="snp-Be-D7A" id="PiL-h1-qwo"/>
+                        <outlet property="priceLabel" destination="WJh-ka-neG" id="9AS-Vz-vR9"/>
+                        <outlet property="productImage" destination="Sht-xc-Kal" id="DGw-kY-tkE"/>
+                        <outlet property="titleLabel" destination="Dje-Fy-pan" id="Jvk-Kd-rss"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgu-3k-dW1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
