@@ -7,6 +7,15 @@
 
 import Foundation
 
+struct TestItem: Codable {
+    let code: Int
+    let body: TestBody
+}
+
+struct TestBody: Codable{
+    let id: String
+}
+
 struct Item: Codable {
     let code: Int
     let body: Body

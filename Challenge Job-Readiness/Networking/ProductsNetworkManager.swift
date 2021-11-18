@@ -9,7 +9,8 @@ import Foundation
 
 struct ProductsNetworkManager {
     let top20ProductsURL =  "https://api.mercadolibre.com/highlights/MLA/category/"
-    let authorizationHeader = " Bearer APP_USR-7814835816886199-111812-5b43df684b91e035e84d3f0a3756887a-362268385"
+    let authorizationHeader = " Bearer APP_USR-7814835816886199-111819-5ab417615776022b75900e021b3f1f5a-362268385"
+    
     
     // Make sure attributes parameters match with model of Item
     let multiGetURL = "https://api.mercadolibre.com/items?attributes=id,title,price,currency_id,sold_quantity,secure_thumbnail,accepts_mercadopago,warranty,pictures&ids="
@@ -44,27 +45,51 @@ struct ProductsNetworkManager {
     
     func getProducts(productsIDs: [String]) async -> [Item] {
         var items: [Item] = []
-  
-        // Make a network call for each ID in productsIDs
-        for id in productsIDs {
-            // Create URL
-            let endpoint = multiGetURL + id
-            let url = URL(string: endpoint)!
+        
+        let testEndpoint = multiGetURL + productsIDs.joined(separator: ",")
+        let testURL = URL(string: testEndpoint)!
+        do {
             
-            do {
-                // Network call
-                let (data, _ ) = try await URLSession.shared.data(from: url)
-               
-                // Decode single product
-                let item = try decodeItem(from: data)
-                
-                // The json gives back an array of 1 element so take the first and only element
-                items.append(item[0])
+            let (data, _ ) = try await URLSession.shared.data(from: testURL)
+            let testitems = try JSONDecoder().decode([TestItem].self, from: data)
+            let correctIDs = testitems.filter({ $0.code == 200}).map { $0.body.id }
+            let finalEndPoint = multiGetURL + correctIDs.joined(separator: ",")
+            let finalURL = URL(string: finalEndPoint)!
+            
+            
+            let (finalData, _ ) = try await URLSession.shared.data(from: finalURL)
 
-            } catch  {
-                print(error.localizedDescription)
-            }
+            items = try decodeItem(from: finalData)
+            return items
+            
+        } catch {
+            print("Error con el test del nuevo llamado")
+            print(error.localizedDescription)
+            
         }
+  
+        //--------------------------------------------------------------------
+//        
+//        // Make a network call for each ID in productsIDs
+//        for id in productsIDs {
+//            // Create URL
+//            let endpoint = multiGetURL + id
+//            let url = URL(string: endpoint)!
+//
+//            do {
+//                // Network call
+//                let (data, _ ) = try await URLSession.shared.data(from: url)
+//
+//                // Decode single product
+//                let item = try decodeItem(from: data)
+//
+//                // The json gives back an array of 1 element so take the first and only element
+//                items.append(item[0])
+//
+//            } catch  {
+//                print(error.localizedDescription)
+//            }
+//        }
         return items
     }
 

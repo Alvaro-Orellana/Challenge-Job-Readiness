@@ -12,7 +12,7 @@ struct CategoriesNetworkManager {
     let categoriesPredictionURL = "https://api.mercadolibre.com/sites/MLA/domain_discovery/search"
     
     
-    func getCategories(using searchTerm: String, limit: Int = 10) async throws -> [Category] {
+    func getCategories(using searchTerm: String, limit: Int = 8) async throws -> [Category] {
         // Format search term for correct use in URL
         let formattedSearchTerm = searchTerm.noAccents().noWhiteSpaces()
         

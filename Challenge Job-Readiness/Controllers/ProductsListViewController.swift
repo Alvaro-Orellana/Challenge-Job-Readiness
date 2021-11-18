@@ -45,7 +45,11 @@ class ProductsListViewController: UIViewController {
                 let productsID = try await networkManager.getMostSoldProductsIDs(of: categoryID)
 
                 // Gets the actual products using the IDs
-                products = await networkManager.getProducts(productsIDs: productsID)                
+                products = await networkManager.getProducts(productsIDs: productsID)
+                
+                if products.isEmpty {
+                    Alert.show(on: self, title: "Nuevo Error", message: "Este tengo que modificar es porque products esta vacio")
+                }
                 
             } catch {
                 Alert.show(on: self, title: "Error", message: error.localizedDescription)
