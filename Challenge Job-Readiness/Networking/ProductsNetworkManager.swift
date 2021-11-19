@@ -16,7 +16,7 @@ struct ProductsNetworkManager {
     let multiGetURL = "https://api.mercadolibre.com/items?attributes=id,title,price,currency_id,sold_quantity,secure_thumbnail,accepts_mercadopago,warranty,pictures&ids="
 
     
-    // Returns an array of the IDs of the products the given category
+    // Returns an array of only the IDs of the products the given category
     func getMostSoldProductsIDs(of categoryId: String) async throws -> [String] {
         let url = URL(string: top20ProductsURL + categoryId)!
         
@@ -27,11 +27,11 @@ struct ProductsNetworkManager {
         // Network call
         let (data, _) = try await URLSession.shared.data(for: request)
         
-        // Decode data 
+        // Decode received data
         let mostSoldProducts = try decodeProducts(from: data)
         
         // Return an array of only the products' ID's
-        return mostSoldProducts.map { $0.id }
+        return mostSoldProducts.map{ $0.id }
     }
    
     
@@ -46,59 +46,64 @@ struct ProductsNetworkManager {
     func getProducts(productsIDs: [String]) async -> [Item] {
         var items: [Item] = []
         
-        let testEndpoint = multiGetURL + productsIDs.joined(separator: ",")
-        let testURL = URL(string: testEndpoint)!
         do {
+            // URL using all the products passed from parameter
+            let testURL = createURL(using: productsIDs)
             
+            // Network call
             let (data, _ ) = try await URLSession.shared.data(from: testURL)
-            let testitems = try JSONDecoder().decode([TestItem].self, from: data)
-            let correctIDs = testitems.filter({ $0.code == 200}).map { $0.body.id }
-            let finalEndPoint = multiGetURL + correctIDs.joined(separator: ",")
-            let finalURL = URL(string: finalEndPoint)!
             
+            // Returns array of model objects that only have status code and ID
+            let testitems = try decodeTestItems(from: data)
             
-            let (finalData, _ ) = try await URLSession.shared.data(from: finalURL)
-
-            items = try decodeItem(from: finalData)
+            // Gets the IDs of only the items with correct status code
+            let correctIDs = testitems
+                                    .filter{ $0.code == 200}
+                                    .map{ $0.body.id }
+                                
+            // URL using only products that have 200 status code
+            let urlOfIDsWithCorrectStatusCode = createURL(using: correctIDs)
+            
+            // Network call
+            let (itemsObjectData, _ ) = try await URLSession.shared.data(from: urlOfIDsWithCorrectStatusCode)
+            
+            items = try decodeItems(from: itemsObjectData)
             return items
             
         } catch {
-            print("Error con el test del nuevo llamado")
-            print(error.localizedDescription)
-            
+            print(error)
         }
-  
-        //--------------------------------------------------------------------
-//        
-//        // Make a network call for each ID in productsIDs
-//        for id in productsIDs {
-//            // Create URL
-//            let endpoint = multiGetURL + id
-//            let url = URL(string: endpoint)!
-//
-//            do {
-//                // Network call
-//                let (data, _ ) = try await URLSession.shared.data(from: url)
-//
-//                // Decode single product
-//                let item = try decodeItem(from: data)
-//
-//                // The json gives back an array of 1 element so take the first and only element
-//                items.append(item[0])
-//
-//            } catch  {
-//                print(error.localizedDescription)
-//            }
-//        }
+        
         return items
     }
 
+    
+    // MARK: Helper methods
+    
+    private func createURL(using productsID: [String]) -> URL {
+        // Base url + products IDs separated by commas
+        let endpoint = multiGetURL + productsID.joined(separator: ",")
+        return URL(string: endpoint)!
+    }
+    
+    
+    // Decodes array of model objects containing only ID and status code
+    private func decodeTestItems(from data: Data) throws -> [TestItem] {
+        let decoder = JSONDecoder()
+        let testItems = try decoder.decode([TestItem].self, from: data)
+        return testItems
+    }
+    
+    
     // Decodes the actual product that contains the useful attributes
-    private func decodeItem(from data: Data) throws -> [Item] {
+    private func decodeItems(from data: Data) throws -> [Item] {
         let decoder = JSONDecoder()
         let items = try decoder.decode([Item].self, from: data)
         return items
     }
+    
+    
+    
     
    
 }

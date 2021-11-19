@@ -48,12 +48,12 @@ class ProductsListViewController: UIViewController {
                 products = await networkManager.getProducts(productsIDs: productsID)
                 
                 if products.isEmpty {
-                    Alert.show(on: self, title: "Nuevo Error", message: "Este tengo que modificar es porque products esta vacio")
+                    Alert.show(on: self, title: "Ningun producto encontrado", message: "Este error es culpa de la API!!")
                 }
                 
             } catch {
                 Alert.show(on: self, title: "Error", message: error.localizedDescription)
-                print(error.localizedDescription)
+                print(error)
             }
         }
     }

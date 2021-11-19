@@ -21,7 +21,7 @@ struct Item: Codable {
     let body: Body
 }
 
-struct Body: Codable {
+struct Body: Codable { 
     let id: String
     let title: String
     let price: Float
@@ -29,7 +29,7 @@ struct Body: Codable {
     let sold_quantity: Int
     let secure_thumbnail: String
     let accepts_mercadopago: Bool
-    let warranty: String
+    let warranty: String?
     let pictures: [Picture]
 }
 
