@@ -117,4 +117,22 @@ extension FavoritesViewController: UITableViewDelegate {
         present(productDetailVC, animated: true)
         //navigationController?.pushViewController(productDetailVC, animated: true)
     }
+    
+    
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // handle delete (by removing the data from your array and updating the tableview)
+            
+            let selectedProduct = favoriteProducts[indexPath.row]
+            
+            persistenceManager.removeFromFavorites(productID: selectedProduct.body.id)
+            getFavoritesProducts()
+            
+        }
+    }
 }

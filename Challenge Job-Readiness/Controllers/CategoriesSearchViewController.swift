@@ -52,7 +52,7 @@ class CategoriesSearchViewController: UIViewController {
                 }
 
             } catch {
-                print(error.localizedDescription)
+                print(error)
                 Alert.show(on: self, title: "Ocurrio un error de red", message: "Checkea tu conexion y vuelve a intentar")
             }
         }

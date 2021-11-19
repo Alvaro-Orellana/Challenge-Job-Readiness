@@ -63,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1942.0289855072465" y="83.705357142857139"/>
+            <point key="canvasLocation" x="2741" y="-486"/>
         </scene>
         <!--Products List View Controller-->
         <scene sceneID="VUG-q1-wZ3">
@@ -104,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eS5-Wx-ZGO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2792.753623188406" y="93.75"/>
+            <point key="canvasLocation" x="3780" y="-486"/>
         </scene>
         <!--Product Detail View Controller-->
         <scene sceneID="fnt-6X-cUV">
@@ -237,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pgu-3k-dW1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3666.666666666667" y="478.79464285714283"/>
+            <point key="canvasLocation" x="4868" y="0.0"/>
         </scene>
         <!--Categorias-->
         <scene sceneID="SBs-1e-cao">
@@ -257,7 +257,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U7O-zY-6XO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1031.8840579710145" y="83.705357142857139"/>
+            <point key="canvasLocation" x="1487" y="-486"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="2Gq-T1-FG3">
@@ -271,6 +271,8 @@
                     <connections>
                         <segue destination="FTr-iA-qfF" kind="relationship" relationship="viewControllers" id="hcv-Mb-wd5"/>
                         <segue destination="Fzs-Iv-9ls" kind="relationship" relationship="viewControllers" id="yg4-7Q-2Wv"/>
+                        <segue destination="asu-DQ-oPF" kind="relationship" relationship="viewControllers" id="cts-Kc-5Ii"/>
+                        <segue destination="idg-ab-zWC" kind="relationship" relationship="viewControllers" id="Zno-nF-jfo"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U9T-I9-ylX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -316,7 +318,39 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7k3-c9-prO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1940.5797101449277" y="858.48214285714278"/>
+            <point key="canvasLocation" x="2741" y="335"/>
+        </scene>
+        <!--Mis Compras-->
+        <scene sceneID="6mI-Rz-aaa">
+            <objects>
+                <viewController id="idg-ab-zWC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LIb-L0-UWL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="NTB-wM-GsZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Mis Compras" image="bag" catalog="system" id="3WW-Ds-xae"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T8B-Wg-oWI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="730" y="1242"/>
+        </scene>
+        <!--Notificaciones-->
+        <scene sceneID="tbt-i9-Bae">
+            <objects>
+                <viewController id="asu-DQ-oPF" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kbK-nI-jbp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="JC7-70-Wbj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Notificaciones" image="bell" catalog="system" id="fpA-dx-th4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QBY-w6-rkS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1487" y="1278"/>
         </scene>
         <!--Favoritos-->
         <scene sceneID="dDr-Uj-M6b">
@@ -335,10 +369,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2BW-wY-eWZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032" y="859"/>
+            <point key="canvasLocation" x="1488" y="335"/>
         </scene>
     </scenes>
     <resources>
+        <image name="bag" catalog="system" width="128" height="128"/>
+        <image name="bell" catalog="system" width="128" height="124"/>
         <image name="list.bullet.indent" catalog="system" width="128" height="74"/>
         <image name="suit.heart.fill" catalog="system" width="128" height="109"/>
         <systemColor name="linkColor">

@@ -9,7 +9,7 @@ import Foundation
 
 struct ProductsNetworkManager {
     let top20ProductsURL =  "https://api.mercadolibre.com/highlights/MLA/category/"
-    let authorizationHeader = " Bearer APP_USR-7814835816886199-111911-67bd7f347719596b9f95dfde6524e209-362268385"
+    let authorizationHeader = " Bearer APP_USR-7814835816886199-111917-c1d3e84bbcf3f28a795c4270659b1e59-362268385"
     
     
     // Make sure attributes parameters match with model of Item

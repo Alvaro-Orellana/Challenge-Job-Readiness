@@ -125,17 +125,17 @@
 		49DA98C4274173CD00E93E3E /* Challenge Job-Readiness */ = {
 			isa = PBXGroup;
 			children = (
-				49DA99132747FDEF00E93E3E /* Persistence */,
 				49DA99002742F0E800E93E3E /* Utilities */,
 				49DA98FB2742D9F000E93E3E /* Extensions */,
-				49DA98F62741763300E93E3E /* Model */,
+				49DA99132747FDEF00E93E3E /* Persistence */,
 				49DA98F52741761300E93E3E /* Networking */,
-				49DA98C5274173CD00E93E3E /* AppDelegate.swift */,
-				49DA98C7274173CD00E93E3E /* SceneDelegate.swift */,
+				49DA98F62741763300E93E3E /* Model */,
 				49DA990927455CF900E93E3E /* Controllers */,
 				49DA990C2745716300E93E3E /* Views */,
 				49DA98CE274173D200E93E3E /* Assets.xcassets */,
 				49DA98D0274173D200E93E3E /* LaunchScreen.storyboard */,
+				49DA98C5274173CD00E93E3E /* AppDelegate.swift */,
+				49DA98C7274173CD00E93E3E /* SceneDelegate.swift */,
 				49DA98D3274173D200E93E3E /* Info.plist */,
 			);
 			path = "Challenge Job-Readiness";
@@ -547,6 +547,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8DKR8S5SZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge Job-Readiness/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -574,6 +575,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = N8DKR8S5SZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Challenge Job-Readiness/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
