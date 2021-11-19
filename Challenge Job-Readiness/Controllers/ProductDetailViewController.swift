@@ -22,24 +22,33 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var buyButton: UIButton!
     @IBOutlet weak var butWithMercadoPagoButton: UIButton!
     
+    var isFavorite = false {
+        didSet {
+            updateFavoritesButton()
+            
+            if isFavorite {
+                persistenceManager.saveToFavorites(productID: product.id)
+            } else {
+                persistenceManager.removeFromFavorites(productID: product.id)
+            }
+        }
+    }
     var product: FinalProduct!
+    let persistenceManager = PersistenceManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Some UI setup
         buyButton.layer.borderWidth = 0.8
         buyButton.layer.borderColor = UIColor(red: 0, green: 0, blue: 230.0, alpha: 1.0).cgColor
-        //navigationController?.navigationBar.backgroundColor = .yellow
         view.backgroundColor = .yellow
         cointainerScrollView.backgroundColor = .white
-        configureFavoritesBarButton()
+        
+        // Fills the views with the corresponding data
         configureLabels()
-        loadImage()
+        loadProductImage()
     }
     
-    private func configureFavoritesBarButton() {
-        let favoritesButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoritesButtonPressed))
-        navigationItem.rightBarButtonItem = favoritesButton
-    }
     
     private func configureLabels() {
         soldItemsLabel.text = "\(product.sold_quantity) Vendidos"
@@ -51,7 +60,7 @@ class ProductDetailViewController: UIViewController {
     }
     
     
-    private func loadImage() {
+    private func loadProductImage() {
         if let url = URL(string: product.secure_thumbnail) {
             Task(priority: .high) {
                 do {
@@ -69,11 +78,26 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    @objc func favoritesButtonPressed() {
-        print("Favorite added")
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        isFavorite = persistenceManager.isFavorite(productID: product.id)
     }
     
+    private func updateFavoritesButton() {
+        let heartImage = UIImage(systemName: isFavorite ? "heart.fill" : "heart")
+        let favoritesButton = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(favoritesButtonPressed))
+        navigationItem.rightBarButtonItem = favoritesButton
+    }
 
+    
+    @objc func favoritesButtonPressed() {
+        isFavorite.toggle()
+    }
+    
+    
+    
+    // MARK: Actions
     @IBAction func buyWithMercadoPagoButtonPressed(_ sender: UIButton) {
         print("buy with MP pressed")
     }

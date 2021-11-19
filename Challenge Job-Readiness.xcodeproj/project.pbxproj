@@ -28,6 +28,7 @@
 		49DA990F2745719100E93E3E /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA990D2745719100E93E3E /* ProductCell.swift */; };
 		49DA99102745719100E93E3E /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DA990E2745719100E93E3E /* ProductCell.xib */; };
 		49DA99122747C3D500E93E3E /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA99112747C3D500E93E3E /* FavoritesViewController.swift */; };
+		49DA99152747FE0000E93E3E /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA99142747FE0000E93E3E /* PersistenceManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		49DA990D2745719100E93E3E /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		49DA990E2745719100E93E3E /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		49DA99112747C3D500E93E3E /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		49DA99142747FE0000E93E3E /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 		49DA98C4274173CD00E93E3E /* Challenge Job-Readiness */ = {
 			isa = PBXGroup;
 			children = (
+				49DA99132747FDEF00E93E3E /* Persistence */,
 				49DA99002742F0E800E93E3E /* Utilities */,
 				49DA98FB2742D9F000E93E3E /* Extensions */,
 				49DA98F62741763300E93E3E /* Model */,
@@ -209,6 +212,14 @@
 				49DA990E2745719100E93E3E /* ProductCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		49DA99132747FDEF00E93E3E /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				49DA99142747FE0000E93E3E /* PersistenceManager.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +360,7 @@
 				49DA98FF2742DFA300E93E3E /* ProductsListViewController.swift in Sources */,
 				49DA98FA274176AE00E93E3E /* CategoriesNetworkManager.swift in Sources */,
 				49DA98FD2742DA1100E93E3E /* String + noAccents.swift in Sources */,
+				49DA99152747FE0000E93E3E /* PersistenceManager.swift in Sources */,
 				49DA990B27455D1400E93E3E /* ProductDetailViewController.swift in Sources */,
 				49DA98C8274173CD00E93E3E /* SceneDelegate.swift in Sources */,
 				49DA990F2745719100E93E3E /* ProductCell.swift in Sources */,
