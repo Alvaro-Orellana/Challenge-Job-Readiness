@@ -10,21 +10,20 @@ import Foundation
 
 struct PersistenceManager {
     let favoritesProductsKey = "favorites"
+    let userDefaults = UserDefaults.standard
 
     
+    func getFavoriteProducts() -> [String] {
+        return userDefaults.object(forKey: favoritesProductsKey) as? [String] ?? []
+    }
+    
     func isFavorite(productID: String) -> Bool {
-        let userDefaults = UserDefaults.standard
-        let favoriteProducts = userDefaults.object(forKey: favoritesProductsKey) as? [String] ?? []
+        let favoriteProducts = getFavoriteProducts()
         return favoriteProducts.contains(productID)
     }
     
-    
     func saveToFavorites(productID: String) {
-        let userDefaults = UserDefaults.standard
-
-        // Get the saved favorite products
-        var favoriteProducts = userDefaults.object(forKey: favoritesProductsKey) as? [String] ?? []
-        print("Before: \(favoriteProducts.description)")
+        var favoriteProducts = getFavoriteProducts()
         
         // Add ID to array only if it is not already saved
         if !favoriteProducts.contains(productID) {
@@ -33,21 +32,15 @@ struct PersistenceManager {
         }
         // Save array to userdafaults
         userDefaults.set(favoriteProducts, forKey: favoritesProductsKey)
-        print("After: \(favoriteProducts.description)")
     }
     
     
     func removeFromFavorites(productID: String) {
-        let userDefaults = UserDefaults.standard
-
-        // Get the favorites products array
-        var favoriteProducts = userDefaults.object(forKey: favoritesProductsKey) as? [String] ?? []
-        print("Before: \(favoriteProducts.description)")
+        var favoriteProducts = getFavoriteProducts()
 
         if let index = favoriteProducts.firstIndex(of: productID) {
             favoriteProducts.remove(at: index)
             userDefaults.set(favoriteProducts, forKey: favoritesProductsKey)
-            print("After: \(favoriteProducts.description)")
         }
     }
 }

@@ -45,8 +45,8 @@ class ProductDetailViewController: UIViewController {
         cointainerScrollView.backgroundColor = .white
         
         // Fills the views with the corresponding data
-        configureLabels()
         loadProductImage()
+        configureLabels()
     }
     
     

@@ -11,10 +11,12 @@ class FavoritesViewController: UIViewController {
 
     // MARK: Outlets
     @IBOutlet weak var favoritesTableView: UITableView!
+    //@IBOutlet weak var noFavoritesView: UITableView!
+    
     
     // MARK: Instance vars
-    var selectedCategory: Category? = Category(category_id: "MLA414035", category_name: "Aromatizadores")
-    var networkManager = ProductsNetworkManager()
+    let networkManager = ProductsNetworkManager()
+    let persistenceManager = PersistenceManager()
     var favoriteProducts: [Item] = [] {
         didSet{
             favoritesTableView.reloadData()
@@ -26,7 +28,7 @@ class FavoritesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialSetup()
-        getTopProducts(of: selectedCategory)
+        //noFavoritesView.backgroundColor = .red
     }
     
     private func initialSetup() {
@@ -36,36 +38,42 @@ class FavoritesViewController: UIViewController {
         title = "Favoritos"
         view.backgroundColor = .yellow
     }
-
-    func getTopProducts(of category: Category?)  {
-        guard let categoryID = category?.category_id
-        else {
-            return
-        }
-        Task(priority: .high) {
-            do {
-                // Gets only the ID's of the the products of given category
-                let productsID = try await networkManager.getMostSoldProductsIDs(of: categoryID)
-
-                // Gets the actual products using the IDs
-                favoriteProducts = await networkManager.getProducts(productsIDs: productsID)
-                
-                if favoriteProducts.isEmpty {
-                    Alert.show(on: self, title: "Ningun producto encontrado", message: "Este error es culpa de la API!!")
-                }
-                
-            } catch {
-                Alert.show(on: self, title: "Error", message: error.localizedDescription)
-                print(error)
-            }
-        }
-    }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        getFavoritesProducts()
     }
+    
+    private func getFavoritesProducts()  {
+        
+        Task(priority: .high) {
+            
+            let savedFavorites = persistenceManager.getFavoriteProducts()
+            if savedFavorites.isEmpty {
+                // Clean table view, otherwise shows the previous saved products
+                favoriteProducts = []
+                
+                //noFavoritesView.isHidden = false
+                //favoritesTableView.isHidden = true
+                Alert.show(on: self, title: "Ningun producto encontrado", message: "Todavia no has agregado favoritos")
+                return
+            }
+            
+            // Found favorites saved
+            //noFavoritesView.isHidden = true
+            //favoritesTableView.isHidden = false
+            
+            favoriteProducts = await networkManager.getProducts(productsIDs: savedFavorites)
+            
+            
+            
+        }
+    }
+    
+    
+   
     
 }
 
