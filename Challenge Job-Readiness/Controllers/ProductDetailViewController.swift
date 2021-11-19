@@ -12,6 +12,7 @@ class ProductDetailViewController: UIViewController {
 
     typealias FinalProduct = Body
     
+    @IBOutlet weak var cointainerScrollView: UIScrollView!
     @IBOutlet weak var soldItemsLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var productImage: UIImageView!
@@ -27,18 +28,30 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         buyButton.layer.borderWidth = 0.8
         buyButton.layer.borderColor = UIColor(red: 0, green: 0, blue: 230.0, alpha: 1.0).cgColor
-
+        //navigationController?.navigationBar.backgroundColor = .yellow
+        view.backgroundColor = .yellow
+        cointainerScrollView.backgroundColor = .white
+        configureFavoritesBarButton()
+        configureLabels()
+        loadImage()
+    }
+    
+    private func configureFavoritesBarButton() {
+        let favoritesButton = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(favoritesButtonPressed))
+        navigationItem.rightBarButtonItem = favoritesButton
+    }
+    
+    private func configureLabels() {
         soldItemsLabel.text = "\(product.sold_quantity) Vendidos"
         titleLabel.text = product.title
         priceLabel.text = "$ \(Int(product.price))"
         acceptsMercadoPagoLabel.isHidden = !product.accepts_mercadopago
         warrantyLabel.text = product.warranty
-        
         butWithMercadoPagoButton.isHidden = !product.accepts_mercadopago
-        loadImage()
     }
     
-    func loadImage() {
+    
+    private func loadImage() {
         if let url = URL(string: product.secure_thumbnail) {
             Task(priority: .high) {
                 do {
@@ -56,11 +69,19 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-
-    @IBAction func buuButtonPressed(_ sender: UIButton) {
+    @objc func favoritesButtonPressed() {
+        print("Favorite added")
     }
     
+
     @IBAction func buyWithMercadoPagoButtonPressed(_ sender: UIButton) {
+        print("buy with MP pressed")
     }
+    
+    @IBAction func buuButtonPressed(_ sender: UIButton) {
+        print("normal buy pressed")
+ }
+    
+    
     
 }

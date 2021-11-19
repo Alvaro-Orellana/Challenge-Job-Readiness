@@ -33,7 +33,7 @@ class FavoritesViewController: UIViewController {
         favoritesTableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "products_cell")
         favoritesTableView.dataSource = self
         favoritesTableView.delegate = self
-        title = "Favorites"
+        title = "Favoritos"
         view.backgroundColor = .yellow
     }
 

@@ -33,12 +33,13 @@ class ProductsListViewController: UIViewController {
         productsTableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "products_cell")
         productsTableView.dataSource = self
         productsTableView.delegate = self
-        title = selectedCategory?.category_name
-        //view.backgroundColor = .yellow
+        title = "Mas vendidos \(selectedCategory?.category_name ?? "")"
+        view.backgroundColor = .yellow
     }
 
     func getTopProducts(of category: Category?)  {
         guard let categoryID = category?.category_id else { return }
+        
         Task(priority: .high) {
             do {
                 // Gets only the ID's of the the products of given category
@@ -52,7 +53,7 @@ class ProductsListViewController: UIViewController {
                 }
                 
             } catch {
-                Alert.show(on: self, title: "Error", message: error.localizedDescription)
+                Alert.show(on: self, title: "Error", message: "No hay items para esta categoria")
                 print(error)
             }
         }
@@ -61,7 +62,7 @@ class ProductsListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
