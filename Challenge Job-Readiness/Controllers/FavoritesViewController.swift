@@ -1,23 +1,23 @@
 //
-//  ProductDetailViewController.swift
+//  FavoritesViewController.swift
 //  Challenge Job-Readiness
 //
-//  Created by Alvaro Hernan Orellana Villarroel on 15/11/2021.
+//  Created by Alvaro Hernan Orellana Villarroel on 19/11/2021.
 //
 
 import UIKit
 
-class ProductsListViewController: UIViewController {
-    
+class FavoritesViewController: UIViewController {
+
     // MARK: Outlets
-    @IBOutlet weak var productsTableView: UITableView!
+    @IBOutlet weak var favoritesTableView: UITableView!
     
     // MARK: Instance vars
-    var selectedCategory: Category?
+    var selectedCategory: Category? = Category(category_id: "MLA414035", category_name: "Aromatizadores")
     var networkManager = ProductsNetworkManager()
-    var products: [Item] = [] {
+    var favoriteProducts: [Item] = [] {
         didSet{
-            productsTableView.reloadData()
+            favoritesTableView.reloadData()
         }
     }
     
@@ -30,24 +30,27 @@ class ProductsListViewController: UIViewController {
     }
     
     private func initialSetup() {
-        productsTableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "products_cell")
-        productsTableView.dataSource = self
-        productsTableView.delegate = self
-        title = selectedCategory?.category_name
-        //view.backgroundColor = .yellow
+        favoritesTableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "products_cell")
+        favoritesTableView.dataSource = self
+        favoritesTableView.delegate = self
+        title = "Favorites"
+        view.backgroundColor = .yellow
     }
 
     func getTopProducts(of category: Category?)  {
-        guard let categoryID = category?.category_id else { return }
+        guard let categoryID = category?.category_id
+        else {
+            return
+        }
         Task(priority: .high) {
             do {
                 // Gets only the ID's of the the products of given category
                 let productsID = try await networkManager.getMostSoldProductsIDs(of: categoryID)
 
                 // Gets the actual products using the IDs
-                products = await networkManager.getProducts(productsIDs: productsID)
+                favoriteProducts = await networkManager.getProducts(productsIDs: productsID)
                 
-                if products.isEmpty {
+                if favoriteProducts.isEmpty {
                     Alert.show(on: self, title: "Ningun producto encontrado", message: "Este error es culpa de la API!!")
                 }
                 
@@ -64,23 +67,19 @@ class ProductsListViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = false
-    }
-    
 }
 
 
+
 // MARK: TableView Data Source
-extension ProductsListViewController: UITableViewDataSource {
+extension FavoritesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        products.count
+        favoriteProducts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "products_cell", for: indexPath) as! ProductCell
-        let product = products[indexPath.row]
+        let product = favoriteProducts[indexPath.row]
         
         // The body property is where the Actual data is
         cell.configure(with: product.body)
@@ -95,18 +94,19 @@ extension ProductsListViewController: UITableViewDataSource {
 
 
 // MARK: TableView Delegate
-extension ProductsListViewController: UITableViewDelegate {
+extension FavoritesViewController: UITableViewDelegate {
     // Creates, configures and navigates to ProductDetail VC when row is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
         // The body property is where the Actual data is
-        let selectedProduct = products[indexPath.row].body
+        let selectedProduct = favoriteProducts[indexPath.row].body
         
         // Create ProductDetail VC and present it
         let productDetailVC = storyboard?.instantiateViewController(withIdentifier: "Product_Detail_VC") as! ProductDetailViewController
        
         productDetailVC.product = selectedProduct
-        navigationController?.pushViewController(productDetailVC, animated: true)
+        present(productDetailVC, animated: true)
+        //navigationController?.pushViewController(productDetailVC, animated: true)
     }
 }

@@ -27,6 +27,7 @@
 		49DA990B27455D1400E93E3E /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA990A27455D1400E93E3E /* ProductDetailViewController.swift */; };
 		49DA990F2745719100E93E3E /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA990D2745719100E93E3E /* ProductCell.swift */; };
 		49DA99102745719100E93E3E /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DA990E2745719100E93E3E /* ProductCell.xib */; };
+		49DA99122747C3D500E93E3E /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA99112747C3D500E93E3E /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		49DA990A27455D1400E93E3E /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		49DA990D2745719100E93E3E /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		49DA990E2745719100E93E3E /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		49DA99112747C3D500E93E3E /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				49DA98C9274173CD00E93E3E /* CategoriesSearchViewController.swift */,
 				49DA98FE2742DFA300E93E3E /* ProductsListViewController.swift */,
 				49DA990A27455D1400E93E3E /* ProductDetailViewController.swift */,
+				49DA99112747C3D500E93E3E /* FavoritesViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			files = (
 				49DA98CA274173CD00E93E3E /* CategoriesSearchViewController.swift in Sources */,
 				49DA98C6274173CD00E93E3E /* AppDelegate.swift in Sources */,
+				49DA99122747C3D500E93E3E /* FavoritesViewController.swift in Sources */,
 				49DA98FF2742DFA300E93E3E /* ProductsListViewController.swift in Sources */,
 				49DA98FA274176AE00E93E3E /* CategoriesNetworkManager.swift in Sources */,
 				49DA98FD2742DA1100E93E3E /* String + noAccents.swift in Sources */,
